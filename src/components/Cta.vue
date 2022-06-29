@@ -1,5 +1,5 @@
 <template>
-    <div class="cta">
+    <section class="cta">
         <div id="cta">
             <div class="logoLg">
                 <div id="logoLg">
@@ -17,7 +17,7 @@
     </ul>
   </p>     </form>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
