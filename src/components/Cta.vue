@@ -8,12 +8,12 @@
             </div>
             <h1><slot name="title"></slot></h1>
             <p> <slot name="info"></slot></p>
-            <form @submit="checkForm" novalidate="true">
-                  <input type="email" placeholder="Email Address"  v-model="email" :class="{active}">
+            <form @submit.prevent="checkForm" novalidate="true">
+                  <input type="email" placeholder="Email Address"  v-model="email" :class="showError? 'active':''">
                 <button type="submit"><img src="../assets/images/icon-arrow.svg" alt="svg"></button>
-     <p v-if="errors.length" id="message">
+     <p v-if="showError" id="message">
     <ul>
-      <p v-for="error in errors" :key="error.id" class="error">{{ error }}</p>
+      <p  class="error">{{ errors }}</p>
     </ul>
   </p>     </form>
         </div>
@@ -24,27 +24,18 @@
 export default {
     data() {
         return {
-            errors: [],
+            errors: "Please a provide a valid email",
             email: null,
-            active:false
+            active:false,
+            showError:false
         }
     },
     methods: {
-              checkForm: function (e) {
-      this.errors = [];
+          checkForm: function () {
 
-      if (!this.email) {
-        this.errors.push('Please provide a valid email');
-        this.active = true;
-      } else if (!this.validEmail(this.email)) {
-        this.errors.push('Please provide a valid email');
-      }
-
-      if (!this.errors.length) {
-        return true;
-      }
-
-      e.preventDefault();
+          if(!this.validEmail(this.email)) {
+            this.showError= true
+          }
     },
     validEmail: function (email) {
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -60,6 +51,8 @@ export default {
 .active {
     background-image: url('../assets/images/icon-error.svg');
     background-repeat: no-repeat;
-    background-position: 196px;
+    background-position: 90%;
+    outline: 1px solid hsl(0, 93%, 68%);
+
 }
 </style>

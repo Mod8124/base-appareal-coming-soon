@@ -82,14 +82,17 @@ padding-bottom:30px;
         input {
            padding: 15px 20px 15px 40px;
            border-radius:50px;
-            border: 1px solid $desatureRed;
+           border: 1px solid $desatureRed;
 
-           input:focus {
-            border: 1px solid $softRed;
         }
+        input:focus {
+            border: 1px solid $softRed;
+            outline: 1px solid $softRed;
 
+            
         input:active {
             border: 1px solid $softRed;
+            outline: 1px solid $softRed;
         }
 
         }
